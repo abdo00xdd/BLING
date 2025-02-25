@@ -54,7 +54,7 @@ model = genai.GenerativeModel(
 
 history = []
 
-print("Bot: Hello, How can I assist you?")
+print("Bot: Bot: Hi! I'm BlingBot, the AI assistant for the Bling app. How can I help you today?\n")
 
 while True:
     user_input = input("You: ")
