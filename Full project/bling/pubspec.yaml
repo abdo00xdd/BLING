@@ -34,6 +34,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +61,10 @@ flutter:
     - family: AntonSC
       fonts:
         - asset: fonts/AntonSC-Regular.ttf
+    - family: Merriweather
+      fonts:
+        - asset: fonts/Merriweather-Regular.ttf
+
 
     - family: JosefinSans
       fonts:
@@ -87,6 +92,11 @@ flutter:
         - asset: fonts/Ubuntu-Regular.ttf
         - asset: fonts/Ubuntu-Bold.ttf
           weight: 700 
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter_18pt-Regular.ttf
+        - asset: fonts/Inter_28pt-Black.ttf
+          weight: 700
     - family: Parkinsans
       fonts:
         - asset: fonts/Parkinsans-VariableFont_wght.ttf

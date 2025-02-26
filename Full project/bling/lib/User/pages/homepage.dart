@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatefulWidget {
@@ -10,8 +11,83 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   late String fullname;
   late int score;
+  late String qoute;
+  late List<Widget> announces = [];
   @override
   Widget build(BuildContext context) {
+    qoute = "The only way to do great work is to love what you do";
+    announces.add(
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        margin: EdgeInsets.all(10),
+        color: Colors.teal,
+        child: Text("Announce 1"),
+      ),
+    );
+    announces.add(
+      Container(
+        width: MediaQuery.of(context).size.width + 100,
+        height: MediaQuery.of(context).size.height + 100,
+        margin: EdgeInsets.all(10),
+        color: Colors.yellow,
+        child: Text("Announce 2"),
+      ),
+    );
+    announces.add(
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        margin: EdgeInsets.all(10),
+        color: Colors.green,
+        child: Text("Announce 3"),
+      ),
+    );
+    announces.add(
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        margin: EdgeInsets.all(10),
+        color: Colors.greenAccent,
+        child: Text("Announce 4"),
+      ),
+    );
+    announces.add(
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        margin: EdgeInsets.all(10),
+        color: Colors.purple,
+        child: Text("Announce 5"),
+      ),
+    );
+    announces.add(
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        margin: EdgeInsets.all(10),
+        color: Colors.redAccent,
+        child: Text("Announce 6"),
+      ),
+    );
+    announces.add(
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        margin: EdgeInsets.all(10),
+        color: Colors.blue,
+        child: Text("Announce 7"),
+      ),
+    );
+    announces.add(
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        margin: EdgeInsets.all(10),
+        color: Colors.lightBlueAccent,
+        child: Text("Announce 8"),
+      ),
+    );
     fullname = "Rida ELANTARI";
     score = 100;
     return SafeArea(
@@ -103,36 +179,75 @@ class _HomepageState extends State<Homepage> {
           Expanded(
             flex: 2,
             child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "$score",
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "$score",
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           Expanded(
-              flex: 1,
-              child: Container(
-                color: Colors.red,
-              )),
+            flex: 1,
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Text(
+                    "Anonces: ",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
-              flex: 5,
-              child: Container(
-                color: Colors.yellow,
-              )),
+            flex: 7, //Annconce
+            child: CarouselSlider(
+              items: announces,
+              options: CarouselOptions(
+                initialPage: 0,
+                autoPlay: true,
+              ),
+            ),
+
+            // width: 400,
+          ),
           Expanded(
-              flex: 2,
-              child: Container(
-                color: Colors.purple,
-              )),
+            flex: 2,
+            child: Container(
+              margin: EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 220, 205, 159),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  'The qoute of the day: " $qoute " ',
+                  style: TextStyle(
+                    fontFamily: 'Merriweather',
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
