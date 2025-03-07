@@ -37,7 +37,7 @@ class _HomepageState extends State<Homepage> {
     announces.add(
       Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        height: 9000,
         margin: EdgeInsets.all(10),
         color: Colors.green,
         child: Text("Announce 3"),
@@ -92,10 +92,12 @@ class _HomepageState extends State<Homepage> {
     score = 100;
     return SafeArea(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
+          SizedBox(
             // For Search and notification
-            flex: 1,
+            width: double.infinity,
+            height: 60,
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Row(
@@ -103,7 +105,6 @@ class _HomepageState extends State<Homepage> {
                   Expanded(
                     // Search
                     flex: 12,
-
                     child: TextField(
                       decoration: InputDecoration(
                         filled: true,
@@ -139,8 +140,10 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-          Expanded(
-            flex: 1,
+          SizedBox(
+            // For Search and notification
+            width: double.infinity,
+            height: 60,
             child: Row(
               children: [
                 Padding(
@@ -218,14 +221,16 @@ class _HomepageState extends State<Homepage> {
           ),
           Expanded(
             flex: 7, //Annconce
-            child: CarouselSlider(
-              items: announces,
-              options: CarouselOptions(
-                initialPage: 0,
-                autoPlay: true,
+            child: Container(
+              height: 900,
+              child: CarouselSlider(
+                items: announces,
+                options: CarouselOptions(
+                  initialPage: 0,
+                  autoPlay: true,
+                ),
               ),
             ),
-
             // width: 400,
           ),
           Expanded(
