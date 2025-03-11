@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 List<Widget> pages = [
   Homepage(),
   Text("Calculator"),
-  Text("time management"),
-  Text("chat bot"),
-  Text("chat Rooms"),
+  Text("Time management"),
+  Text("Chat"),
   Text("Profile"),
 ];
 

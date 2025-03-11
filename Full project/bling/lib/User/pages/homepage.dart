@@ -53,12 +53,14 @@ class _HomepageState extends State<Homepage> {
       ),
     );
     announces.add(
-      Container(
+      SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        margin: EdgeInsets.all(10),
-        color: Colors.purple,
-        child: Text("Announce 5"),
+        child: Container(
+          margin: EdgeInsets.all(10),
+          color: Colors.purple,
+          child: Text("Announce 5"),
+        ),
       ),
     );
     announces.add(
@@ -221,18 +223,20 @@ class _HomepageState extends State<Homepage> {
           ),
           Expanded(
             flex: 7, //Annconce
-            child: Container(
-              height: 900,
-              child: CarouselSlider(
-                items: announces,
-                options: CarouselOptions(
-                  initialPage: 0,
-                  autoPlay: true,
-                ),
+            child: CarouselSlider(
+              items: announces,
+              options: CarouselOptions(
+                height: 900, // Adjust height to make it rectangular
+                viewportFraction: 0.9, // Adjust width percentage
+                enlargeCenterPage: true,
+                initialPage: 0,
+                autoPlay: true,
               ),
             ),
-            // width: 400,
           ),
+
+          // width: 400,
+
           Expanded(
             flex: 2,
             child: Container(
