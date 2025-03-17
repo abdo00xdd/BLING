@@ -5,8 +5,8 @@ app.secret_key = 'votre_clé_secrète'  # Nécessaire pour utiliser les sessions
 
 # Données simulées pour les salles de chat
 rooms = [
-    {"name": "Privé", "type": "Privé", "description": "Salle privée pour les membres VIP", "created_by": "Admin"},
-    {"name": "Public", "type": "Public", "description": "Salle publique pour tout le monde", "created_by": "Admin"}
+    {"name": "Room1", "type": "Privé", "description": "Salle privée pour les membres VIP", "created_by": "Admin"},
+    {"name": "Room2", "type": "Public", "description": "Salle publique pour tout le monde", "created_by": "Admin"}
 ]
 
 # Route pour la page de connexion
@@ -39,6 +39,7 @@ def create_room():
     room_name = request.form.get('room_name')
     room_type = request.form.get('room_type')
     description = request.form.get('description')
+    room_code = request.form.get('room_code') if room_type == 'Privé' else None
 
     if not room_name or not room_type or not description:
         flash("Tous les champs sont obligatoires.", 'error')
@@ -47,7 +48,8 @@ def create_room():
             "name": room_name,
             "type": room_type,
             "description": description,
-            "created_by": session['user']  # Utiliser le nickname de l'utilisateur connecté
+            "created_by": session['user'],
+            "code": room_code  # Ajouter le code de sécurité pour les salles privées
         }
         rooms.append(new_room)
         flash(f"La salle '{room_name}' a été créée avec succès.", 'success')
@@ -67,14 +69,23 @@ def search():
     return render_template('index.html', rooms=filtered_rooms, user=session.get('user'))
 
 # Route pour rejoindre une salle
-@app.route('/join/<room_name>')
+@app.route('/join/<room_name>', methods=['GET', 'POST'])
 def join_room(room_name):
     room = next((room for room in rooms if room['name'] == room_name), None)
-    if room:
-        return f"Vous avez rejoint la salle {room_name}"
-    else:
+    if not room:
         flash(f"La salle '{room_name}' n'existe pas.", 'error')
         return redirect(url_for('index'))
+
+    if room['type'] == 'Privé':
+        if request.method == 'POST':
+            entered_code = request.form.get('room_code')
+            if entered_code == room['code']:
+                return f"Vous avez rejoint la salle privée {room_name}"
+            else:
+                flash("Code incorrect. Veuillez réessayer.", 'error')
+        return render_template('enter_code.html', room_name=room_name)
+    else:
+        return f"Vous avez rejoint la salle publique {room_name}"
 
 if __name__ == '__main__':
     app.run(debug=True)
