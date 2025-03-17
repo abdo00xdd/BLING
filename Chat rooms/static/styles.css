@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.alert-error {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+h1, h2 {
+    color: #007bff;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+a {
+    color: #007bff;
+}
+
+
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    text-align: center;
+}
+
+/* Conteneur de connexion */
+.login-container {
+    background-color: white;
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #007bff;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Bouton */
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Alertes */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.alert-error {
+    background-color: #ffebee;
+    color: #c62828;
+}

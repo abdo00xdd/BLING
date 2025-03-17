@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 
-app = Flask(__name__, static_folder='.', template_folder='.')
+app = Flask(__name__)
 app.secret_key = 'votre_clé_secrète'  # Nécessaire pour utiliser les sessions
 
 # Données simulées pour les salles de chat

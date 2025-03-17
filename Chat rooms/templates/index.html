@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>BLING Chat Rooms</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>BLING Chat Rooms</h1>
+
+    <!-- Messages flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Connexion/Déconnexion -->
+    {% if user %}
+        <p>Connecté en tant que <strong>{{ user }}</strong> | <a href="{{ url_for('logout') }}">Déconnexion</a></p>
+        <button id="toggleCreateRoomForm">Créer une salle</button>
+    {% else %}
+        <p><a href="{{ url_for('login') }}" class="btn">Se connecter</a></p>
+    {% endif %}
+
+    <!-- Formulaire de création de salle -->
+    <div id="createRoomForm" style="display: none;">
+        <h2>Créer une salle :</h2>
+        <form action="{{ url_for('create_room') }}" method="post">
+            <input type="text" name="room_name" placeholder="Nom de la salle" required>
+            <select name="room_type" required>
+                <option value="Public">Public</option>
+                <option value="Privé">Privé</option>
+            </select>
+            <input type="text" name="description" placeholder="Description" required>
+            <button type="submit">Créer</button>
+        </form>
+    </div>
+
+    <!-- Liste des salles -->
+    <h2>Liste des salles :</h2>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Créée par</th>
+            <th>Action</th>
+        </tr>
+        {% for room in rooms %}
+        <tr>
+            <td>{{ room.name }}</td>
+            <td>{{ room.type }}</td>
+            <td>{{ room.description }}</td>
+            <td>{{ room.created_by }}</td>
+            <td><a href="{{ url_for('join_room', room_name=room.name) }}">Rejoindre</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        document.getElementById('toggleCreateRoomForm').addEventListener('click', function() {
+            const form = document.getElementById('createRoomForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
