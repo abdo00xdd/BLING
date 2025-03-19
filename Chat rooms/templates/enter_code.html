@@ -2,11 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion - BLING</title>
+    <title>Entrer le code - BLING</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Connexion</h1>
+    <h1>Entrer le code d'accès</h1>
     
     <!-- Afficher les messages flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -19,12 +19,12 @@
         {% endif %}
     {% endwith %}
 
-    <!-- Formulaire de connexion -->
-    <form action="{{ url_for('login') }}" method="post">
-        <input type="text" name="nickname" placeholder="Entrez votre nickname" required>
-        <button type="submit">Se connecter</button>
+    <!-- Formulaire pour entrer le code -->
+    <form action="{{ url_for('join_room', room_name=room_name) }}" method="post">
+        <input type="text" name="room_code" placeholder="Entrez le code d'accès (4 chiffres)" required>
+        <button type="submit">Rejoindre la salle</button>
     </form>
 
-    <p>Pas encore de compte ? <a href="{{ url_for('login') }}">Utilisez un nickname pour commencer.</a></p>
+    <p><a href="{{ url_for('index') }}">Retour à la liste des salles</a></p>
 </body>
 </html>

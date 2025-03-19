@@ -7,8 +7,8 @@
 </head>
 <body>
     <h1>BLING Chat Rooms</h1>
-
-    <!-- Messages flash -->
+    
+    <!-- Afficher les messages flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -19,53 +19,95 @@
         {% endif %}
     {% endwith %}
 
-    <!-- Connexion/Déconnexion -->
+    <!-- Bouton de connexion/déconnexion -->
     {% if user %}
         <p>Connecté en tant que <strong>{{ user }}</strong> | <a href="{{ url_for('logout') }}">Déconnexion</a></p>
-        <button id="toggleCreateRoomForm">Créer une salle</button>
     {% else %}
-        <p><a href="{{ url_for('login') }}" class="btn">Se connecter</a></p>
+        <p><a href="{{ url_for('login') }}">Se connecter</a></p>
     {% endif %}
 
-    <!-- Formulaire de création de salle -->
+    <!-- Bouton pour afficher/masquer le formulaire de création -->
+    {% if user %}
+        <button id="toggleCreateRoomForm">Créer une nouvelle salle</button>
+    {% else %}
+        <p>Vous devez <a href="{{ url_for('login') }}">vous connecter</a> pour créer une salle.</p>
+    {% endif %}
+
+    <!-- Formulaire pour créer une nouvelle salle (masqué par défaut) -->
     <div id="createRoomForm" style="display: none;">
-        <h2>Créer une salle :</h2>
+        <h2>Créer une nouvelle salle :</h2>
         <form action="{{ url_for('create_room') }}" method="post">
             <input type="text" name="room_name" placeholder="Nom de la salle" required>
-            <select name="room_type" required>
+            <select name="room_type" id="roomType" required>
                 <option value="Public">Public</option>
                 <option value="Privé">Privé</option>
             </select>
+            <div id="codeField" style="display: none;">
+                <input type="text" name="room_code" placeholder="Code d'accès (4 chiffres)" required>
+            </div>
             <input type="text" name="description" placeholder="Description" required>
-            <button type="submit">Créer</button>
+            <button type="submit">Créer la salle</button>
         </form>
     </div>
 
-    <!-- Liste des salles -->
+    <!-- Formulaire de recherche -->
+    <h2>Rechercher une salle :</h2>
+    <form action="{{ url_for('search') }}" method="get">
+        <input type="text" name="query" placeholder="Rechercher une salle...">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <!-- Liste des salles disponibles -->
     <h2>Liste des salles :</h2>
     <table>
-        <tr>
-            <th>Nom</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Créée par</th>
-            <th>Action</th>
-        </tr>
-        {% for room in rooms %}
-        <tr>
-            <td>{{ room.name }}</td>
-            <td>{{ room.type }}</td>
-            <td>{{ room.description }}</td>
-            <td>{{ room.created_by }}</td>
-            <td><a href="{{ url_for('join_room', room_name=room.name) }}">Rejoindre</a></td>
-        </tr>
-        {% endfor %}
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Créée par</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td>{{ room['name'] }}</td>
+                <td>{{ room['type'] }}</td>
+                <td>{{ room['description'] }}</td>
+                <td>{{ room['created_by'] }}</td>
+                <td>
+                    {% if room['type'] == 'Privé' %}
+                        <a href="{{ url_for('join_room', room_name=room['name']) }}">Rejoindre (Code requis)</a>
+                    {% else %}
+                        <a href="{{ url_for('join_room', room_name=room['name']) }}">Rejoindre</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
+    <!-- Script JavaScript pour gérer l'affichage du formulaire et du champ de code -->
     <script>
+        // Afficher/masquer le formulaire de création de salle
         document.getElementById('toggleCreateRoomForm').addEventListener('click', function() {
             const form = document.getElementById('createRoomForm');
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        });
+
+        // Afficher/masquer le champ de code en fonction du type de salle
+        document.getElementById('roomType').addEventListener('change', function() {
+            const codeField = document.getElementById('codeField');
+            if (this.value === 'Privé') {
+                codeField.style.display = 'block';
+            } else {
+                codeField.style.display = 'none';
+            }
         });
     </script>
 </body>
