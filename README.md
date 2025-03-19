@@ -15,7 +15,7 @@
         <ul>
             <li>Python (Flask)</li>
             <li>MySQL</li>
-            <li>JavaScript, HTML, CSS</li>
+            <li>Flutter</li>
         </ul>
         <h2>👥 Créateurs / Programmeurs</h2>
         <ul>
@@ -26,8 +26,6 @@
             <li><a href="https://www.linkedin.com/in/ayman-el-kerboubi-76b109318/" target="_blank">Ayman EL KERBOUBI</a></li>
             <li><a href="https://www.linkedin.com/in/hamza-yahya-ba4187334/" target="_blank">Hamza YAHYA</a></li>
         </ul>
-        <h2>📜 Licence</h2>
-        <p>Ce projet est sous licence MIT.</p>
     </div>
 </body>
 </html>
