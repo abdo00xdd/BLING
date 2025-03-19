@@ -45,6 +45,7 @@ model = genai.GenerativeModel(
 
 # Conversation history
 history = []
+rv_history = []
 
 # Function to extract text from images
 def extract_text_from_image(image_path):
