@@ -2,29 +2,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion - BLING</title>
+    <title>Connexion - BLING Chat Rooms</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h1>Connexion</h1>
-    
-    <!-- Afficher les messages flash -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    <!-- Formulaire de connexion -->
-    <form action="{{ url_for('login') }}" method="post">
+    <form action="{{ url_for('auth.login') }}" method="post">
         <input type="text" name="nickname" placeholder="Entrez votre nickname" required>
         <button type="submit">Se connecter</button>
     </form>
-
-    <p>Pas encore de compte ? <a href="{{ url_for('login') }}">Utilisez un nickname pour commencer.</a></p>
 </body>
 </html>
